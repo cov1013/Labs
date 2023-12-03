@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{c1f9d8d7-2aad-49fb-821d-121027a293fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib">
+      <UniqueIdentifier>{218608f0-2129-4d68-87dc-343b07f4b6db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\Buffers">
+      <UniqueIdentifier>{98b5bace-627b-44c3-9c10-ba58a0a49953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\DataStructure">
+      <UniqueIdentifier>{386867d4-3c90-401a-9d64-a0b2281e0393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\MemPool">
+      <UniqueIdentifier>{ecd66e86-24d4-4a01-9b41-c1caaad96a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\Tools">
+      <UniqueIdentifier>{27fe6d0e-7ed1-4cc0-a8a9-828e9f0828fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\netlib\CCpuUsage.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CCrashDump.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLogger.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPacket.cpp">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CRingBuffer.cpp">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPDH.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\Profiler.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\LanClient\CLanClient.cpp">
+      <Filter>Server\netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CMonitorAgent.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\netlib\Common.h">
+      <Filter>Server\netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCpuUsage.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCrashDump.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeQueue.h">
+      <Filter>Server\netlib\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeStack.h">
+      <Filter>Server\netlib\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLogger.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool.h">
+      <Filter>Server\netlib\MemPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool_TLS.h">
+      <Filter>Server\netlib\MemPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPacket.h">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CRingBuffer.h">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPDH.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CParser.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Profiler.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\LanClient\CLanClient.h">
+      <Filter>Server\netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="CMonitorAgent.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

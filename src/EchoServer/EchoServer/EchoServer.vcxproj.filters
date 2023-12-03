@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{1373afd1-c174-4016-a1aa-ce08b8d1862c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib">
+      <UniqueIdentifier>{148875a9-75e7-420e-a760-65a8ea2f26f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\DataStructure">
+      <UniqueIdentifier>{116c4756-7a69-4cfa-a94c-c137a753fc9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\Buffers">
+      <UniqueIdentifier>{4de51812-d49e-4d09-a97c-d08cfe976632}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\Tools">
+      <UniqueIdentifier>{6fcf7e90-d4de-4119-a656-39b3778753cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\netlib\MemPool">
+      <UniqueIdentifier>{027bbf0f-dc12-4882-9cbd-cf5b749a557f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CEchoServer.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\netlib\LanServer\CLanServer.cpp">
+      <Filter>Server\netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CCpuUsage.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CCrashDump.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLogger.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPDH.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\Profiler.cpp">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPacket.cpp">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CRingBuffer.cpp">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CEchoServer.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Common.h">
+      <Filter>Server\netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\LanServer\CLanServer.h">
+      <Filter>Server\netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCpuUsage.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCrashDump.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeQueue.h">
+      <Filter>Server\netlib\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeStack.h">
+      <Filter>Server\netlib\DataStructure</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLogger.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPDH.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Profiler.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPacket.h">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CRingBuffer.h">
+      <Filter>Server\netlib\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CParser.h">
+      <Filter>Server\netlib\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool.h">
+      <Filter>Server\netlib\MemPool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool_TLS.h">
+      <Filter>Server\netlib\MemPool</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
