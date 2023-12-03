@@ -1,13 +1,4 @@
 #pragma once
-#pragma comment(lib, "ws2_32")
-#include <ws2tcpip.h>
-#include <winsock2.h>
-#include <mstcpip.h>
-#include <windows.h>
-#include <process.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <strsafe.h>
 #include "Common.h"
 #include "CPDH.h"
 #include "CCrashDump.h"

@@ -1,9 +1,11 @@
 #pragma once
 #pragma comment(lib, "Winmm")
-//#pragma comment(lib, "lib/libmysql")
-//#pragma comment(lib, "lib/cpp_redis")
-//#pragma comment(lib, "lib/tacopie")
+#pragma comment(lib, "ws2_32")
 
+#include <ws2tcpip.h>
+#include <winsock.h>
+#include <mstcpip.h>
+#include <windows.h>
 #include <time.h>
 #include <wchar.h>
 #include <stdio.h>
@@ -13,8 +15,10 @@
 #include <unordered_map>
 #include "Protocol.h"
 #include "CDBConnector_TLS.h"
-#include "CNetServer.h"
 #include "CLanClient.h"
+
+
+#include "CNetServer.h"
 
 using namespace std;
 

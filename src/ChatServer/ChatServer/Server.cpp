@@ -147,11 +147,11 @@ namespace cov1013
 		//----------------------------------------------------------
 		if (m_bRedisFlag)
 		{
-			m_hRedisIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, NULL, m_NumberOfRedisIOCPActiveThread);
+			/*m_hRedisIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, NULL, m_NumberOfRedisIOCPActiveThread);
 			for (int i = 0; i < m_NumberOfRedisIOCPWorkerThread; i++)
 			{
 				m_hRedisIOCPWorkerThreads[i] = (HANDLE)_beginthreadex(nullptr, 0, RedisThread, this, false, nullptr);
-			}
+			}*/
 		}
 
 		//----------------------------------------------------------
@@ -654,12 +654,12 @@ namespace cov1013
 			//---------------------------------------------------------------
 			// 로그인 요청 정보를 RedisJob 구조체에 세팅해서 Enqeueue
 			//---------------------------------------------------------------
-			st_REDIS_JOB* pRedisJob = m_RedisJobPool.Alloc();
+			/*st_REDIS_JOB* pRedisJob = m_RedisJobPool.Alloc();
 			pRedisJob->AccountNo = pClient->AccountNo;
 			pRedisJob->SessionID = SessionID;
 			pMessage->Get(pRedisJob->SessionKey, en_SESSION_KEY_MAX);
 
-			PostQueuedCompletionStatus(m_hRedisIOCP, 0xFFFFFFFF, (ULONG_PTR)pRedisJob, nullptr);
+			PostQueuedCompletionStatus(m_hRedisIOCP, 0xFFFFFFFF, (ULONG_PTR)pRedisJob, nullptr);*/
 		}
 		//---------------------------------------------------------------
 		// 로그인 처리를 UpdateThread에서 완료한다.
@@ -1306,8 +1306,8 @@ namespace cov1013
 					m_AuthCompletedTotal = 1;
 				}
 
-				CONSOLE(eLOG_LEVEL_DEBUG, L"RedisJobPool     Size   : %d\n", m_RedisJobPool.GetCapacity());
-				CONSOLE(eLOG_LEVEL_DEBUG, L"RedisJobPool     Use    : %d\n", m_RedisJobPool.GetUseCount());
+				//CONSOLE(eLOG_LEVEL_DEBUG, L"RedisJobPool     Size   : %d\n", m_RedisJobPool.GetCapacity());
+				//CONSOLE(eLOG_LEVEL_DEBUG, L"RedisJobPool     Use    : %d\n", m_RedisJobPool.GetUseCount());
 				CONSOLE(eLOG_LEVEL_DEBUG, L"RedisConnector   TPS    : %u\n", m_RedisConnectorTPS);
 				CONSOLE(eLOG_LEVEL_DEBUG, L"---------------------------------------------\n");
 

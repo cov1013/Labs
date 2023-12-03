@@ -1,28 +1,4 @@
 #pragma once
-#pragma comment(lib, "Winmm")
-#pragma comment(lib, "ws2_32")
-#include <ws2tcpip.h>
-#include <winsock.h>
-#include <mstcpip.h>
-#include <windows.h>
-#include <process.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <strsafe.h>
-#include <time.h>
-#include "Common.h"
-#include "CPDH.h"
-#include "CCrashDump.h"
-#include "CCpuUsage.h"
-#include "CParser.h"
-#include "CLogger.h"
-#include "Profiler.h"
-#include "CMemoryPool.h"
-#include "CMemoryPool_TLS.h"
-#include "CLockFreeStack.h"
-#include "CLockFreeQueue.h"
-#include "CRingBuffer.h"
-#include "CPacket.h"
 
 //#define __MULTI_THREAD_DEBUG_MODE__
 
