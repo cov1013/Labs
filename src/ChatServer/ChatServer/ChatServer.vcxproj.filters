@@ -22,7 +22,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Protocol.h" />
-    <ClInclude Include="Server.h" />
+    <ClInclude Include="ChatServer.h" />
     <ClInclude Include="..\..\netlib\CCpuUsage.h">
       <Filter>netlib\tool</Filter>
     </ClInclude>
@@ -92,10 +92,14 @@
     <ClInclude Include="..\..\netlib\MMO_Common.h">
       <Filter>netlib\module</Filter>
     </ClInclude>
+    <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="ErrorCode.h" />
+    <ClInclude Include="ServerConfig.h" />
+    <ClInclude Include="ClientManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ChatServer.cpp" />
     <ClCompile Include="..\..\netlib\CCpuUsage.cpp">
       <Filter>netlib\tool</Filter>
     </ClCompile>

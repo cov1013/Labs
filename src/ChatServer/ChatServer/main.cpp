@@ -1,18 +1,29 @@
 #define _CRTDBG_MAP_ALLOC
+
 #include <stdlib.h>
-#include <crtdbg.h>
 #include <stdio.h>
-#include "Server.h"
+#include <crtdbg.h>
 
-using namespace cov1013;
+#include <ws2tcpip.h>
+#include <winsock.h>
+#include <mstcpip.h>
+#include <windows.h>
+#include <time.h>
+#include <wchar.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <list>
+#include <unordered_map>
+#include "CLanClient.h"
+#include "CNetServer.h"
 
-CChatServer ChatServer;
+#include "ChatServer.h"
 
-int main(void)
+void main()
 {
-	ChatServer.Run();
+	cov1013::ChatServer* p_server = new cov1013::ChatServer;
+	p_server->Run();
 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
-	return 0;
 }

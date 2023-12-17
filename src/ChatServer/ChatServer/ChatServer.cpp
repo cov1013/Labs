@@ -1,8 +1,34 @@
-#include "Server.h"
+
+#pragma comment(lib, "Winmm")
+#pragma comment(lib, "ws2_32")
+
+#include <ws2tcpip.h>
+#include <winsock.h>
+#include <mstcpip.h>
+#include <windows.h>
+#include <time.h>
+#include <wchar.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <list>
+#include <unordered_map>
+
+#include "CommonDefine.h"
+#include "ErrorCode.h"
+
+#include "Protocol.h"
+#include "CDBConnector_TLS.h"
+#include "CLanClient.h"
+#include "CNetServer.h"
+
+#include "ClientManager.h"
+
+#include "ChatServer.h"
 
 namespace cov1013
 {
-	CChatServer::CChatServer()
+	ChatServer::ChatServer()
 	{
 		m_AuthWaitCount = 0;
 		m_AuthFailedTotal = 0;
@@ -17,7 +43,7 @@ namespace cov1013
 		//m_pRedisConnector = nullptr;
 	}
 
-	CChatServer::~CChatServer()
+	ChatServer::~ChatServer()
 	{
 		if (nullptr != m_pDBConnector)
 		{
@@ -25,7 +51,7 @@ namespace cov1013
 		}
 	}
 
-	void CChatServer::Run(void)
+	void ChatServer::Run(void)
 	{
 		if (m_bRunFlag)
 		{
@@ -172,7 +198,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 서버 종료
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::Quit(void)
+	void ChatServer::Quit(void)
 	{
 		//----------------------------------------------------------------------
 		// 서버가 실행중이라면 완벽한 종료
@@ -262,7 +288,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 서버 컨트롤러
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::Controler(void)
+	void ChatServer::Controler(void)
 	{
 		WCHAR ControlKey = _getwch();
 
@@ -335,7 +361,7 @@ namespace cov1013
 		}
 	}
 
-	int CChatServer::GetAuthCompletedPlayerCount(void)
+	int ChatServer::GetAuthCompletedPlayerCount(void)
 	{
 		int iResult = 0;
 		unordered_map<SESSION_ID, st_CLIENT*>::iterator iter = m_Clients.begin();
@@ -357,7 +383,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::OnConnectionRequest(const WCHAR* ConnectIP, const WORD ConnectPORT)
+	bool ChatServer::OnConnectionRequest(const WCHAR* ConnectIP, const WORD ConnectPORT)
 	{
 		return false;
 	}
@@ -365,7 +391,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 새로운 클라이언트가 접속했다.
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnClientJoin(const SESSION_ID SessionID)
+	void ChatServer::OnClientJoin(const SESSION_ID SessionID)
 	{
 		st_UPDATE_JOB* pNewJob = m_UpdateJobPool.Alloc();		
 		pNewJob->Type = st_UPDATE_JOB::en_JOB_CONNECT;
@@ -379,7 +405,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 기존 클라이언트가 연결 종료됐다.
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnClientLeave(const SESSION_ID SessionID)
+	void ChatServer::OnClientLeave(const SESSION_ID SessionID)
 	{
 		st_UPDATE_JOB* pNewJob = m_UpdateJobPool.Alloc();
 		pNewJob->Type = st_UPDATE_JOB::en_JOB_DISCONNECT;
@@ -393,7 +419,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 패킷을 수신 받았다.
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnRecv(const SESSION_ID SessionID, CPacket* pRecvPacket)
+	void ChatServer::OnRecv(const SESSION_ID SessionID, CPacket* pRecvPacket)
 	{
 		// 패킷이 반환되지 않게 래퍼런스 카운트 증가
 		// 해당 패킷은 UpdateThread 처리 완료 후 반환된다.
@@ -416,26 +442,26 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 패킷을 송신했다.
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnSend(const SESSION_ID SessionID, const DWORD dwSendLength)
+	void ChatServer::OnSend(const SESSION_ID SessionID, const DWORD dwSendLength)
 	{
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnWorkerThreadBegin(void)
+	void ChatServer::OnWorkerThreadBegin(void)
 	{
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnWorkerThreadEnd(void)
+	void ChatServer::OnWorkerThreadEnd(void)
 	{
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// 라이브러리에서 에러가 발생했다.
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::OnError(const en_ERROR_CODE eErrCode, const SESSION_ID SessionID)
+	void ChatServer::OnError(const en_ERROR_CODE eErrCode, const SESSION_ID SessionID)
 	{
 		switch (eErrCode)
 		{
@@ -479,7 +505,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// Update Thread Jod 처리 : 신규 접속
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::JobProcedure_Connect(const SESSION_ID SessionID)
+	bool ChatServer::JobProcedure_Connect(const SESSION_ID SessionID)
 	{
 		if (nullptr != FindClient(SessionID))
 		{
@@ -496,7 +522,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// Update Thread Jod 처리 : 접속 종료
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::JobProcedure_Disconnect(const SESSION_ID SessionID)
+	bool ChatServer::JobProcedure_Disconnect(const SESSION_ID SessionID)
 	{
 		return DeleteClient(SessionID);
 	}
@@ -504,7 +530,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// Update Thread Jod 처리 : 요청 패킷
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::JobProcedure_RecvMessage(const SESSION_ID SessionID, CPacket* pRecvPacket)
+	bool ChatServer::JobProcedure_RecvMessage(const SESSION_ID SessionID, CPacket* pRecvPacket)
 	{
 		bool bResult = false;
 		WORD wPacketType;
@@ -546,7 +572,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// Update Thread Jod 처리 : 하트비트
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::JobProcedure_HeartBeat(void)
+	bool ChatServer::JobProcedure_HeartBeat(void)
 	{
 		if (m_Clients.size() == 0)
 		{
@@ -572,7 +598,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// Update Thread Jod 처리 : Redis 확인 완료 -> 로그인 완료 처리
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::JobProcedure_RedisCompeleted(const SESSION_ID SessionID)
+	bool ChatServer::JobProcedure_RedisCompeleted(const SESSION_ID SessionID)
 	{
 		//------------------------------------------------------------------
 		// [예외] 로그인 요청 패킷을 보내두고 Redis 확인하는 도중 삭제될수도 있음.
@@ -605,7 +631,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 패킷 요청 처리 : 로그인 처리
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::PacketProcedure_Login(const SESSION_ID SessionID, CPacket* pMessage)
+	bool ChatServer::PacketProcedure_Login(const SESSION_ID SessionID, CPacket* pMessage)
 	{
 		m_RecvLoginMessage += 1;
 
@@ -687,7 +713,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 패킷 요청 처리 : 섹터 이동
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::PacketProcedure_SectorMove(const SESSION_ID SessionID, CPacket* pMessage)
+	bool ChatServer::PacketProcedure_SectorMove(const SESSION_ID SessionID, CPacket* pMessage)
 	{
 		m_RecvMoveSectorMessage += 1;
 
@@ -776,7 +802,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 패킷 요청 처리 : 채팅 송신
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::PacketProcedure_ChatMessage(const SESSION_ID SessionID, CPacket* pMessage)
+	bool ChatServer::PacketProcedure_ChatMessage(const SESSION_ID SessionID, CPacket* pMessage)
 	{
 		m_RecvChatMessage += 1; 
 
@@ -835,7 +861,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 패킷 요청 처리 : 하트비트 갱신
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::PacketProcedure_Heartbeat(const SESSION_ID SessionID)
+	bool ChatServer::PacketProcedure_Heartbeat(const SESSION_ID SessionID)
 	{
 		st_CLIENT* pClient = FindClient(SessionID);
 		pClient->LastRecvTime = timeGetTime();
@@ -846,7 +872,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 수신 패킷 만들기 : 로그인 응답
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::MakePacket_Login(CPacket* pSendMessage, const BYTE byStatus, const INT64 AccountNo)
+	void ChatServer::MakePacket_Login(CPacket* pSendMessage, const BYTE byStatus, const INT64 AccountNo)
 	{
 		*pSendMessage << (WORD)en_PACKET_CS_CHAT_RES_LOGIN;
 		*pSendMessage << byStatus;
@@ -856,7 +882,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 수신 패킷 만들기 : 섹터 이동 응답
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::MakePacket_SectorMove(CPacket* pSendMessage, const INT64 AccountNo, const WORD shSectorX, const WORD shSectorY)
+	void ChatServer::MakePacket_SectorMove(CPacket* pSendMessage, const INT64 AccountNo, const WORD shSectorX, const WORD shSectorY)
 	{
 		*pSendMessage << (WORD)en_PACKET_CS_CHAT_RES_SECTOR_MOVE;
 		*pSendMessage << AccountNo;
@@ -867,7 +893,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 수신 패킷 만들기 : 채팅 송신 응답
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::MakePacket_ChatMessage(CPacket* pSendMessage, const INT64 AccountNo, const WCHAR* szID, const WCHAR* szNickName, const WORD shChatMessageLen, const WCHAR* szChatMessage)
+	void ChatServer::MakePacket_ChatMessage(CPacket* pSendMessage, const INT64 AccountNo, const WCHAR* szID, const WCHAR* szNickName, const WORD shChatMessageLen, const WCHAR* szChatMessage)
 	{
 		*pSendMessage << (WORD)en_PACKET_CS_CHAT_RES_MESSAGE;
 		*pSendMessage << AccountNo;
@@ -880,16 +906,16 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 새로운 클라이언트 생성
 	//////////////////////////////////////////////////////////////////////////////////
-	CChatServer::st_CLIENT* CChatServer::CreateClient(const SESSION_ID SessionID)
+	ChatServer::st_CLIENT* ChatServer::CreateClient(const SESSION_ID SessionID)
 	{
 		//-----------------------------------------------
 		// 1. 메모리풀에서 메모리 할당 후 세팅
 		//-----------------------------------------------
 		st_CLIENT* pNewClient = m_ClientPool.Alloc();
 		pNewClient->bLogin = false;
-		pNewClient->Sector.wX = df_INVALID_SECTOR_POS;
-		pNewClient->Sector.wY = df_INVALID_SECTOR_POS;
-		pNewClient->AccountNo = df_INVALID_ACCOUNT_NO;
+		pNewClient->Sector.wX = INVALID_SECTOR_POS;
+		pNewClient->Sector.wY = INVALID_SECTOR_POS;
+		pNewClient->AccountNo = INVALID_ACCOUNT_NO;
 		pNewClient->SessionID = SessionID;
 		pNewClient->LastRecvTime = timeGetTime();
 
@@ -904,7 +930,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 기존 클라이언트 찾기
 	//////////////////////////////////////////////////////////////////////////////////
-	CChatServer::st_CLIENT* CChatServer::FindClient(const SESSION_ID SessionID)
+	ChatServer::st_CLIENT* ChatServer::FindClient(const SESSION_ID SessionID)
 	{
 		unordered_map<SESSION_ID, st_CLIENT*>::iterator ClientIter = m_Clients.find(SessionID);
 
@@ -921,7 +947,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 기존 클라이언트 삭제
 	//////////////////////////////////////////////////////////////////////////////////
-	bool CChatServer::DeleteClient(const SESSION_ID SessionID)
+	bool ChatServer::DeleteClient(const SESSION_ID SessionID)
 	{
 		st_CLIENT* pClient = FindClient(SessionID);
 		unordered_map<SESSION_ID, st_CLIENT*>::iterator iter;
@@ -947,7 +973,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 클라이언트 관리 컨테이너 정리
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::ClearClients(void)
+	void ChatServer::ClearClients(void)
 	{
 		unordered_map<SESSION_ID, st_CLIENT*>::iterator iter = m_Clients.begin();
 
@@ -963,7 +989,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 주변 섹터 정보 얻기
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::GetSectorAround(int iSectorX, int iSectorY, st_SECTOR_AROUND* pDestiation)
+	void ChatServer::GetSectorAround(int iSectorX, int iSectorY, st_SECTOR_AROUND* pDestiation)
 	{
 		pDestiation->iCount = 0;
 
@@ -995,7 +1021,7 @@ namespace cov1013
 		}
 	}
 
-	void CChatServer::ClearSector(void)
+	void ChatServer::ClearSector(void)
 	{
 		for (int y = 0; y < en_SECTOR_MAX_Y; y++)
 		{
@@ -1019,7 +1045,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 주변 섹터 전체 유저에게 패킷 송신
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::SendPacket_Around(st_CLIENT* pClient, CPacket* pSendMessage, const bool bSendMe)
+	void ChatServer::SendPacket_Around(st_CLIENT* pClient, CPacket* pSendMessage, const bool bSendMe)
 	{
 		st_SECTOR_AROUND SectorAround;
 
@@ -1040,7 +1066,7 @@ namespace cov1013
 	//////////////////////////////////////////////////////////////////////////////////
 	// 지정 섹터 하나에 속한 모든 유저에게 패킷 송신
 	//////////////////////////////////////////////////////////////////////////////////
-	void CChatServer::SendPacket_SectorOne(const int iX, const int iY, CPacket* pSendMessage, const SESSION_ID ExceptSessionID)
+	void ChatServer::SendPacket_SectorOne(const int iX, const int iY, CPacket* pSendMessage, const SESSION_ID ExceptSessionID)
 	{
 		//-----------------------------------------------
 		// 1. 섹터를 찾는다
@@ -1066,14 +1092,14 @@ namespace cov1013
 		}
 	}
 
-	unsigned int __stdcall CChatServer::UpdateThread(void* lpParam)
+	unsigned int __stdcall ChatServer::UpdateThread(void* lpParam)
 	{
-		int iResult = ((CChatServer*)lpParam)->UpdateThread_Procedure();
+		int iResult = ((ChatServer*)lpParam)->UpdateThread_Procedure();
 
 		return iResult;
 	}
 
-	int CChatServer::UpdateThread_Procedure(void)
+	int ChatServer::UpdateThread_Procedure(void)
 	{
 		DWORD		dwTransferred;
 		OVERLAPPED* pOverlapped;
@@ -1134,11 +1160,11 @@ namespace cov1013
 	// Monitor Thread
 	// 
 	//////////////////////////////////////////////////////////////////////////////////
-	unsigned int __stdcall CChatServer::MonitorThread(void* lpParam)
+	unsigned int __stdcall ChatServer::MonitorThread(void* lpParam)
 	{
-		return ((CChatServer*)lpParam)->MonitorThread_Procedure();
+		return ((ChatServer*)lpParam)->MonitorThread_Procedure();
 	}
-	int CChatServer::MonitorThread_Procedure(void)
+	int ChatServer::MonitorThread_Procedure(void)
 	{
 		CCpuUsage	CpuUsage;
 		CPDH		PDH(L"ChatServer");
@@ -1387,11 +1413,11 @@ namespace cov1013
 	// HeartBeat Thread
 	// 
 	//////////////////////////////////////////////////////////////////////////////////
-	unsigned int __stdcall CChatServer::HeartBeatThread(void* lpParam)
+	unsigned int __stdcall ChatServer::HeartBeatThread(void* lpParam)
 	{
-		return ((CChatServer*)lpParam)->HeartBeatThread_Procedure();
+		return ((ChatServer*)lpParam)->HeartBeatThread_Procedure();
 	}
-	int CChatServer::HeartBeatThread_Procedure(void)
+	int ChatServer::HeartBeatThread_Procedure(void)
 	{
 		while (m_bLoop)
 		{
@@ -1414,12 +1440,12 @@ namespace cov1013
 	// Redis Thread
 	// 
 	//////////////////////////////////////////////////////////////////////////////////
-	//unsigned int __stdcall CChatServer::RedisThread(void* lpParam)
+	//unsigned int __stdcall ChatServer::RedisThread(void* lpParam)
 	//{
-	//	return ((CChatServer*)lpParam)->RedisThread_Procedure();
+	//	return ((ChatServer*)lpParam)->RedisThread_Procedure();
 	//}
 
-	//int CChatServer::RedisThread_Procedure(void)
+	//int ChatServer::RedisThread_Procedure(void)
 	//{
 	//	DWORD			StartTime;
 	//	DWORD			ElapsedTime;
@@ -1509,12 +1535,12 @@ namespace cov1013
 	//	return 0;
 	//}
 
-	unsigned int __stdcall CChatServer::MonitorServerConnectThread(void* lpParam)
+	unsigned int __stdcall ChatServer::MonitorServerConnectThread(void* lpParam)
 	{
-		return ((CChatServer*)lpParam)->MonitorServerConnectThread_Procedure();
+		return ((ChatServer*)lpParam)->MonitorServerConnectThread_Procedure();
 	}
 
-	int CChatServer::MonitorServerConnectThread_Procedure(void)
+	int ChatServer::MonitorServerConnectThread_Procedure(void)
 	{
 		WCHAR	BIND_IP[16];
 		WCHAR	SERVER_IP[16];
@@ -1572,15 +1598,15 @@ namespace cov1013
 	//=================================================================================
 	// Monitor Server Client 관련
 	//=================================================================================
-	CChatServer::CMonitorClient::CMonitorClient()
+	ChatServer::CMonitorClient::CMonitorClient()
 	{
 	}
 
-	CChatServer::CMonitorClient::~CMonitorClient()
+	ChatServer::CMonitorClient::~CMonitorClient()
 	{
 	}
 
-	void CChatServer::CMonitorClient::SendPacket_UpdateData(const int DataValues[], const int DataCount)
+	void ChatServer::CMonitorClient::SendPacket_UpdateData(const int DataValues[], const int DataCount)
 	{
 		if (!m_bConnectedFlag)
 		{
@@ -1601,7 +1627,7 @@ namespace cov1013
 		}
 	}
 
-	void CChatServer::CMonitorClient::OnEnterJoinServer(void)
+	void ChatServer::CMonitorClient::OnEnterJoinServer(void)
 	{
 		//-------------------------------------------------------
 		// 로그인 요청 패킷 보내기
@@ -1614,37 +1640,37 @@ namespace cov1013
 		m_bConnectedFlag = true;
 	}
 
-	void CChatServer::CMonitorClient::OnLeaveServer(void)
+	void ChatServer::CMonitorClient::OnLeaveServer(void)
 	{
 		m_bConnectedFlag = false;
 	}
 
-	void CChatServer::CMonitorClient::OnRecv(CPacket* pRecvPacket)
+	void ChatServer::CMonitorClient::OnRecv(CPacket* pRecvPacket)
 	{
 	}
 
-	void CChatServer::CMonitorClient::OnSend(int sendsize)
+	void ChatServer::CMonitorClient::OnSend(int sendsize)
 	{
 	}
 
-	void CChatServer::CMonitorClient::OnWorkerThreadBegin(void)
+	void ChatServer::CMonitorClient::OnWorkerThreadBegin(void)
 	{
 	}
 
-	void CChatServer::CMonitorClient::OnWorkerThreadEnd(void)
+	void ChatServer::CMonitorClient::OnWorkerThreadEnd(void)
 	{
 	}
 
-	void CChatServer::CMonitorClient::OnError(int errorcode, wchar_t* szMsg)
+	void ChatServer::CMonitorClient::OnError(int errorcode, wchar_t* szMsg)
 	{
 	}
-	void CChatServer::CMonitorClient::MakePacket_Login(CPacket* pSendPacket, const int ServerNo)
+	void ChatServer::CMonitorClient::MakePacket_Login(CPacket* pSendPacket, const int ServerNo)
 	{
 		*pSendPacket << (WORD)en_PACKET_SS_MONITOR_LOGIN;
 		*pSendPacket << ServerNo;
 	}
 
-	void CChatServer::CMonitorClient::MakePacket_DataUpdate(CPacket* pSendPacket, const BYTE DataType, const int DataValue, int TimeStamp)
+	void ChatServer::CMonitorClient::MakePacket_DataUpdate(CPacket* pSendPacket, const BYTE DataType, const int DataValue, int TimeStamp)
 	{
 		*pSendPacket << (WORD)en_PACKET_SS_MONITOR_DATA_UPDATE;
 		*pSendPacket << DataType;

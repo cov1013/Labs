@@ -1,35 +1,13 @@
 #pragma once
-#pragma comment(lib, "Winmm")
-#pragma comment(lib, "ws2_32")
-
-#include <ws2tcpip.h>
-#include <winsock.h>
-#include <mstcpip.h>
-#include <windows.h>
-#include <time.h>
-#include <wchar.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <list>
-#include <unordered_map>
-#include "Protocol.h"
-#include "CDBConnector_TLS.h"
-#include "CLanClient.h"
-
-
-#include "CNetServer.h"
 
 using namespace std;
 
 namespace cov1013
 {
-	class CChatServer : public CNetServer
+	class CDBConnector_TLS;
+	class ChatServer : public CNetServer
 	{
 	public:
-
-		#define df_INVALID_SECTOR_POS	-1
-		#define df_INVALID_ACCOUNT_NO	-1
 
 		enum en_CONFIG
 		{
@@ -94,13 +72,13 @@ namespace cov1013
 		//==================================================================
 		// RedisThread Job ±¸Á¶Ã¼
 		//==================================================================
-		struct st_REDIS_JOB
+	/*	struct st_REDIS_JOB
 		{
 			SESSION_ID		SessionID;
 			INT64			AccountNo;
 			char			SessionKey[en_SESSION_KEY_MAX];
 
-		};
+		};*/
 
 	private:
 
@@ -133,12 +111,19 @@ namespace cov1013
 		};
 
 	public:
-		CChatServer();
-		~CChatServer();
-		void Run(void);
-		void Quit(void);
-		void Controler(void);
-		int GetAuthCompletedPlayerCount(void);
+		ChatServer();
+
+		~ChatServer();
+
+		void Run();
+
+		void Quit();
+
+		void Controler();
+
+		int GetAuthCompletedPlayerCount();
+
+
 
 	protected:
 		virtual bool OnConnectionRequest(const WCHAR* ConnectIP, const WORD ConnectPORT);
@@ -149,6 +134,8 @@ namespace cov1013
 		virtual void OnWorkerThreadBegin(void);
 		virtual void OnWorkerThreadEnd(void);
 		virtual void OnError(const en_ERROR_CODE eErrCode, const SESSION_ID SessionID = df_INVALID_SESSION_ID);
+
+
 
 	private:
 		bool PacketProcedure_Login(const SESSION_ID SessionID, CPacket* pRecvPacket);
@@ -235,7 +222,7 @@ namespace cov1013
 
 		CMemoryPool<st_CLIENT>					m_ClientPool = CMemoryPool<st_CLIENT>(0);
 		CMemoryPool<st_UPDATE_JOB>				m_UpdateJobPool = CMemoryPool<st_UPDATE_JOB>(0);
-		CMemoryPool<st_REDIS_JOB>				m_RedisJoFbPool = CMemoryPool<st_REDIS_JOB>(0);
+		//CMemoryPool<st_REDIS_JOB>				m_RedisJoFbPool = CMemoryPool<st_REDIS_JOB>(0);
 
 		CDBConnector_TLS*						m_pDBConnector;
 

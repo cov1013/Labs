@@ -36,3 +36,29 @@
 
 [System] [2023-12-04 01:13:39 / SYSTEM / 000000018] Monitor Server Connect Failed!
 
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000000] Winsock initialization Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000001] Winsock initialization Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000002] ListenSocket Creation Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000003] Nalge Setup Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000004] ZeroCopy Setup Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000005] Linger Setup Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000006] bind Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000007] listen Successful
+
+[System] [2023-12-04 03:29:29 / SYSTEM / 000000008] Start (IP:127.0.0.1 / Port:5000 / WorkerThread:5 / ActiveThread:5 / Session:15000 / Nalge:1 / Zerocopy:1)
+
+[System] [2023-12-04 03:29:33 / SYSTEM / 000000009] Accpet Thread Exit Completed
+
+[System] [2023-12-04 03:29:33 / SYSTEM / 000000010] All Session Out Complete
+
+[System] [2023-12-04 03:29:33 / SYSTEM / 000000011] All Worker Thread Exit Completed
+
+[System] [2023-12-04 03:29:33 / SYSTEM / 000000012] Quit Completed
+

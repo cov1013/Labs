@@ -137,7 +137,7 @@ namespace cov1013
 			} while (CAS(&m_Top, pNewNode, pNode) != (LONG64)pNode);
 		}
 
-		DATA* Alloc(void)
+		DATA* Alloc()
 		{
 			long lCapacity = m_lCapacity;
 			if (lCapacity < InterlockedIncrement(&m_lUseCount))
