@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="0.COMMON">
+      <UniqueIdentifier>{2547f5ac-9916-4fb9-b767-7cfa933fd67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1.SYSTEM">
+      <UniqueIdentifier>{cab88bfe-5dbe-4eac-ad52-18008052a6d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2.NETWORK">
+      <UniqueIdentifier>{0a5d30ed-3f0b-444c-8684-2be281a99eef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3.CONTENT">
+      <UniqueIdentifier>{5cac96b5-fde3-4771-8e18-5772f006d4aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0.COMMON\default">
+      <UniqueIdentifier>{8e62e5a4-da61-4c49-a539-ca167cf5ab60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0.COMMON\default\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2.NETWORK\Buffer">
+      <UniqueIdentifier>{7a7023bf-6e5c-4a24-8975-016cf8d08f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3.CONTENT\Manager">
+      <UniqueIdentifier>{881eb383-9a54-4ad9-b3d9-41c915ae6bf8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="client.h">
+      <Filter>0.COMMON\default</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>0.COMMON\default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>0.COMMON\default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>0.COMMON\default</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>0.COMMON</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>0.COMMON</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>0.COMMON</Filter>
+    </ClInclude>
+    <ClInclude Include="CLogger.h">
+      <Filter>1.SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="profiler.h">
+      <Filter>1.SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="CScreenDib.h">
+      <Filter>1.SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteDib.h">
+      <Filter>1.SYSTEM</Filter>
+    </ClInclude>
+    <ClInclude Include="network.h">
+      <Filter>2.NETWORK</Filter>
+    </ClInclude>
+    <ClInclude Include="CPacket.h">
+      <Filter>2.NETWORK\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CStreamQ.h">
+      <Filter>2.NETWORK\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="packetProc.h">
+      <Filter>2.NETWORK</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjectManager.h">
+      <Filter>3.CONTENT\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyManager.h">
+      <Filter>3.CONTENT\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerObject.h">
+      <Filter>3.CONTENT</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseObject.h">
+      <Filter>3.CONTENT</Filter>
+    </ClInclude>
+    <ClInclude Include="CEffectObject.h">
+      <Filter>3.CONTENT</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>3.CONTENT</Filter>
+    </ClInclude>
+    <ClInclude Include="CList.h">
+      <Filter>0.COMMON\default</Filter>
+    </ClInclude>
+    <ClInclude Include="makePacket.h">
+      <Filter>2.NETWORK</Filter>
+    </ClInclude>
+    <ClInclude Include="CFrameSkip.h">
+      <Filter>1.SYSTEM</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="client.rc">
+      <Filter>0.COMMON\default\리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>0.COMMON\default\리소스 파일</Filter>
+    </Image>
+    <Image Include="client.ico">
+      <Filter>0.COMMON\default\리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="CLogger.cpp">
+      <Filter>1.SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="profiler.cpp">
+      <Filter>1.SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="CScreenDib.cpp">
+      <Filter>1.SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteDib.cpp">
+      <Filter>1.SYSTEM</Filter>
+    </ClCompile>
+    <ClCompile Include="network.cpp">
+      <Filter>2.NETWORK</Filter>
+    </ClCompile>
+    <ClCompile Include="CPacket.cpp">
+      <Filter>2.NETWORK\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CStreamQ.cpp">
+      <Filter>2.NETWORK\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="packetProc.cpp">
+      <Filter>2.NETWORK</Filter>
+    </ClCompile>
+    <ClCompile Include="makePacket.cpp">
+      <Filter>2.NETWORK</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyManager.cpp">
+      <Filter>3.CONTENT\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectManager.cpp">
+      <Filter>3.CONTENT\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CBaseObject.cpp">
+      <Filter>3.CONTENT</Filter>
+    </ClCompile>
+    <ClCompile Include="CEffectObject.cpp">
+      <Filter>3.CONTENT</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerObject.cpp">
+      <Filter>3.CONTENT</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>3.CONTENT</Filter>
+    </ClCompile>
+    <ClCompile Include="CFrameSkip.cpp">
+      <Filter>1.SYSTEM</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
