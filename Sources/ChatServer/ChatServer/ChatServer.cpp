@@ -69,7 +69,7 @@ namespace cov1013
 			return;
 		}
 
-		// TODO: 여기서 생성하면 NetServer 실행할 때 로그 폴더가 없다...
+		// TODO: 여기서 생성하면 NetServer 실행할 때 로그 폴더가 없다... (이거 수정해야 서버 실행함.)
 		CrashDumper::CrashDumper();
 		Logger::Logger(L"./Logs_ChatServer", eLOG_LEVEL_DEBUG);
 		InitializeProfiler(L"./Profiling_ChatServer", en_PROFILER_UNIT::eUNIT_NANO);

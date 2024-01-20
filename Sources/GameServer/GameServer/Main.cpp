@@ -2,6 +2,8 @@
 #include "GamePlayer.h"
 #include "GameServer.h"
 
+#include "DBConnector/DBConnector/DBConnector.h"
+
 /*
 - alignas 넣기
 - Accpet / Game / Session 카운팅해서 출력
@@ -17,6 +19,12 @@ GameServer server;
 
 int main(void)
 {
+	//DBConnector	DBConnector(L"127.0.0.1", L"root", L"0000", L"testdb", 3306);
+	//if (DBConnector.Connect() == false)
+	//{
+	//	return 0;
+	//}
+
 	server.Run();
 
 	return 0;

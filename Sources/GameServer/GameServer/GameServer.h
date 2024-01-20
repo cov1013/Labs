@@ -1,4 +1,7 @@
 #pragma once
+#pragma comment(lib, "DBConnector.lib")
+#pragma comment(lib, "ConaCore.lib")
+
 #include <vector>
 #include <time.h>
 #include "Protocol.h"
