@@ -7,14 +7,14 @@
     <Filter Include="Collection">
       <UniqueIdentifier>{ece747e8-e320-47fa-9be9-56e62f0f369c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Allocator">
+      <UniqueIdentifier>{784ecd65-7f71-4d51-995d-50529fa43904}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Tool">
       <UniqueIdentifier>{7f180ff2-3c4b-45f4-a992-542ad94de8f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Module">
       <UniqueIdentifier>{d44549ec-85c4-4b3b-9eff-a974e5573ae9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Allocator">
-      <UniqueIdentifier>{784ecd65-7f71-4d51-995d-50529fa43904}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
