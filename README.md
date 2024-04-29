@@ -1,4 +1,4 @@
-# cov1013core
+# CovEngine
 
 ## 실행 방법
 1. 서버 빌드
