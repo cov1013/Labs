@@ -10,7 +10,7 @@
 #include <strsafe.h>
 #include "LanClient.h"
 
-namespace cov1013
+namespace covEngine
 {
     ///////////////////////////////////////////////////////////////////////////
     // »ý¼ºÀÚ

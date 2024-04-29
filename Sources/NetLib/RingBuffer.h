@@ -1,6 +1,6 @@
 #pragma once	
 
-namespace cov1013
+namespace covEngine
 {
 	class RingBuffer
 	{

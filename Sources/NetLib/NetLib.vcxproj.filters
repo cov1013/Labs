@@ -92,9 +92,6 @@
     <ClInclude Include="LanServer.h">
       <Filter>Module</Filter>
     </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>Module</Filter>
-    </ClInclude>
     <ClInclude Include="PacketBuffer.h">
       <Filter>Buffer</Filter>
     </ClInclude>
@@ -113,5 +110,6 @@
     <ClInclude Include="MMOSession.h">
       <Filter>Module</Filter>
     </ClInclude>
+    <ClInclude Include="Common.h" />
   </ItemGroup>
 </Project>

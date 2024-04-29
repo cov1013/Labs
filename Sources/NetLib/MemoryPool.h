@@ -5,7 +5,7 @@
 
 //#define __SAFE_MODE__
 
-namespace cov1013
+namespace covEngine
 {
 	template <class DATA>
 	class MemoryPool

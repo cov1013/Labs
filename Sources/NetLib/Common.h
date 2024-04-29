@@ -10,7 +10,7 @@
 - INVALID_SESSION_ID 확인 코드 빼기.......
 - 월요일 오후 2시까지 Stop 눌러서 Accept / Connect Total 확인 해서 스샷 찍어서 보내주기.
 */
-namespace cov1013
+namespace covEngine
 {
 //#define __LOG__
 //#define __GQCSEX__
@@ -79,7 +79,7 @@ namespace cov1013
 		en_PACKET_LEN_MAX = 1024,
 	};
 
-	enum en_WORKER_JOB_TYPE
+	enum en_WORKER_JOB_TYPE : unsigned int
 	{
 		en_IO_FAILED = 0x00000000,
 		en_THREAD_EXIT = 0xFFFFFFFF,

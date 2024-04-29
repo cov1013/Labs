@@ -7,7 +7,7 @@
 #include <direct.h>
 #include <psapi.h>
 
-namespace cov1013
+namespace covEngine
 {
 	class CrashDumper
 	{

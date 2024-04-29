@@ -5,7 +5,7 @@
 
 using namespace std;
 
-namespace cov1013
+namespace covEngine
 {
 	template <class DATA>
 	class MemoryPool_TLS

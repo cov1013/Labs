@@ -24,14 +24,14 @@
 #include "RingBuffer.h"
 #include "PacketBuffer.h"
 
-namespace cov1013
+namespace covEngine
 {
 	class LanServer
 	{
 	public:
 		struct st_OVERLAPPED
 		{
-			enum en_TYPE
+			enum en_TYPE : short
 			{
 				en_RECV,
 				en_SEND
@@ -111,34 +111,26 @@ namespace cov1013
 		{
 			st_SESSION()	// 처음 세션 생성시 아래 항목 필수 초기화
 			{
-				SessionIndex = df_INVALID_SESSION_INDEX;
-				SessionID = df_INVALID_SESSION_ID;
 				RecvOverlapped.Type = st_OVERLAPPED::en_RECV;
 				SendOverlapped.Type = st_OVERLAPPED::en_SEND;
-				PacketCount = 0;
-				bSendFlag = false;
-				bDisconnectFlag = false;
-				bReleaseFlag = false;
-				IOCount = 0;
 			}
 
-			SESSION_INDEX				SessionIndex;
-			SESSION_ID					SessionID;
-			st_OVERLAPPED				RecvOverlapped;
-			st_OVERLAPPED				SendOverlapped;
-			int							PacketCount;
-			PacketBuffer* Packets[en_SEND_PACKET_MAX];
-			LockFreeQueue<PacketBuffer*>	SendQ;
-			RingBuffer					RecvQ;
-			bool						bSendFlag;
-			bool						bDisconnectFlag;
-			SOCKET						Socket;
-			WORD						Port;
-			WCHAR						IP[16];
+			SESSION_INDEX SessionIndex = df_INVALID_SESSION_INDEX;
+			SESSION_ID SessionID = df_INVALID_SESSION_ID;
+			st_OVERLAPPED RecvOverlapped;
+			st_OVERLAPPED SendOverlapped;
+			int	PacketCount = 0;
+			PacketBuffer* Packets[en_SEND_PACKET_MAX] = {};
+			LockFreeQueue<PacketBuffer*> SendQ;
+			RingBuffer RecvQ;
+			bool bSendFlag = false;
+			bool bDisconnectFlag = false;
+			SOCKET Socket = INVALID_SOCKET;
+			WORD Port = 0;
+			WCHAR IP[16] = {};
 
-			alignas(en_CACHE_ALIGN)
-				short						bReleaseFlag;
-			short						IOCount;
+			alignas(en_CACHE_ALIGN) short bReleaseFlag = 0;
+			short IOCount = 0;
 
 #ifdef __MULTI_THREAD_DEBUG_MODE__
 			st_LOG						m_Logs[st_LOG::en_LOG_MAX];

@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "CPUMeter.h"
 
-namespace cov1013
+namespace covEngine
 {
 	//--------------------------------------------------------------------
 // 생성자, 확인대상 프로세스 핸들. 미입력시 자기 자신.

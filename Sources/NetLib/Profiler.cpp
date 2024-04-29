@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "Profiler.h"
 
-namespace cov1013
+namespace covEngine
 {
 	//-------------------------------------------------------
 	// TLS ¿Œµ¶Ω∫

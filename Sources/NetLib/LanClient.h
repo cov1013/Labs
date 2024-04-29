@@ -13,7 +13,7 @@
 #include "RingBuffer.h"
 #include "PacketBuffer.h"
 
-namespace cov1013
+namespace covEngine
 {
 	class LanClient
 	{

@@ -1,6 +1,6 @@
 #include "LanServer.h"
 
-namespace cov1013
+namespace covEngine
 {
 	LanServer::LanServer()
 	{
@@ -18,6 +18,10 @@ namespace cov1013
 		}
 
 		LOG(L"System", eLOG_LEVEL_SYSTEM, L"Winsock initialization Successful\n");
+	}
+
+	LanServer::~LanServer()
+	{
 	}
 
 	bool LanServer::Start(

@@ -24,7 +24,7 @@
 #include "PacketBuffer.h"
 #include "MMOSession.h"
 
-namespace cov1013
+namespace covEngine
 {
 	class MMOServer
 	{

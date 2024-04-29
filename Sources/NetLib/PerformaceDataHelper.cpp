@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "PerformaceDataHelper.h"
 
-namespace cov1013
+namespace covEngine
 {
 	PerformaceDataHelper::PerformaceDataHelper(const WCHAR* szProcessName)
 	{

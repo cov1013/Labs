@@ -26,7 +26,7 @@
 
 //#define __MULTI_THREAD_DEBUG_MODE__
 
-namespace cov1013
+namespace covEngine
 {
 	class NetServer
 	{
