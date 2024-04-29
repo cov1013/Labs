@@ -1,7 +1,7 @@
 #include <windows.h>
 #include "RingBuffer.h"
 
-namespace covEngine
+namespace cov1013
 {
 	//////////////////////////////////////////////////////////////////
 	// »ý¼ºÀÚ

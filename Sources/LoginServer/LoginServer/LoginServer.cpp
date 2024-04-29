@@ -42,7 +42,7 @@ namespace cov1013
 		//----------------------------------------------------------------------
 		// 서버 설정 정보 불러오기 & 세팅
 		//----------------------------------------------------------------------
-		if (!m_Parser.LoadFile(L"./Configs/LoginServerConfig.ini"))
+		if (!m_Parser.LoadFile(L"./Configs/LoginServer.ini"))
 		{
 			wprintf(L"Server Config Open Failed");
 			m_bRunFlag = false;

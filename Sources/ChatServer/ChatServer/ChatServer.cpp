@@ -62,7 +62,7 @@ namespace cov1013
 		}
 		m_bRunFlag = true;
 
-		if (!m_Parser.LoadFile(L"./Configs/ChatServerConfig.ini"))
+		if (!m_Parser.LoadFile(L"./Configs/ChatServer.ini"))
 		{
 			wprintf(L"Server Config Open Failed");
 			m_bRunFlag = false;
@@ -71,8 +71,8 @@ namespace cov1013
 
 		// TODO: 여기서 생성하면 NetServer 실행할 때 로그 폴더가 없다... (이거 수정해야 서버 실행함.)
 		CrashDumper::CrashDumper();
-		Logger::Logger(L"./Logs_ChatServer", eLOG_LEVEL_DEBUG);
-		InitializeProfiler(L"./Profiling_ChatServer", en_PROFILER_UNIT::eUNIT_NANO);
+		Logger::Logger(L"./Logs/ChatServer", eLOG_LEVEL_DEBUG);
+		InitializeProfiler(L"./Profiling/ChatServer", en_PROFILER_UNIT::eUNIT_NANO);
 
 		WCHAR	BIND_IP[16];
 		WORD	BIND_PORT;

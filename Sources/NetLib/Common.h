@@ -10,7 +10,7 @@
 - INVALID_SESSION_ID 확인 코드 빼기.......
 - 월요일 오후 2시까지 Stop 눌러서 Accept / Connect Total 확인 해서 스샷 찍어서 보내주기.
 */
-namespace covEngine
+namespace cov1013
 {
 //#define __LOG__
 //#define __GQCSEX__

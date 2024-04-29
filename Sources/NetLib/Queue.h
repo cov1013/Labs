@@ -1,7 +1,7 @@
 #pragma once
 #include "MemoryPool.h"
 
-namespace covEngine
+namespace cov1013
 {
 	template <typename T>
 	class Queue

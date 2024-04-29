@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-namespace covEngine
+namespace cov1013
 {
 	class ConfigLoader
 	{

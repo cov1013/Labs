@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "Logger.h"
 
-namespace covEngine
+namespace cov1013
 {
 	//----------------------------------------------
 	// 기본 로그 레벨, 외부에서 설정할 수 있다.

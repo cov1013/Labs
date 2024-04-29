@@ -4,7 +4,7 @@
 #include <Pdh.h>
 #include <strsafe.h>
 
-namespace covEngine
+namespace cov1013
 {
 	#define df_PDH_ETHERNET_MAX	8
 

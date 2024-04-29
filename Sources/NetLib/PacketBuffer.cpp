@@ -2,7 +2,7 @@
 #include "Profiler.h"
 #include "CrashDumper.h"
 
-namespace covEngine
+namespace cov1013
 {
 	MemoryPool_TLS<PacketBuffer> PacketBuffer::sm_MemoryPool = MemoryPool_TLS<PacketBuffer>(0);
 	//MemoryPool<PacketBuffer> PacketBuffer::sm_MemoryPool = MemoryPool<PacketBuffer>(0);

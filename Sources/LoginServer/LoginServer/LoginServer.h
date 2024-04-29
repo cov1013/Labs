@@ -1,8 +1,5 @@
 #pragma once
 #pragma comment(lib, "Winmm")
-#pragma comment(lib, "lib/libmysql")
-#pragma comment(lib, "lib/cpp_redis")
-#pragma comment(lib, "lib/tacopie")
 
 #include <time.h>
 #include <wchar.h>

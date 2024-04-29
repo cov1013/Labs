@@ -1,6 +1,6 @@
 #include "CrashDumper.h"
 
-namespace covEngine
+namespace cov1013
 {
 	long CrashDumper::m_DumpCount = 0;
 }

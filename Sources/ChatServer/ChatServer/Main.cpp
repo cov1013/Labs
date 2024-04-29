@@ -23,7 +23,7 @@
 
 int main()
 {
-	auto server = std::make_unique<cov1013::ChatServer>();
+	std::unique_ptr<cov1013::ChatServer> server = std::make_unique<cov1013::ChatServer>();
 	server->Run();
 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);

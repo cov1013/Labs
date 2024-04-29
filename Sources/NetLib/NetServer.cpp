@@ -1,6 +1,6 @@
 #include "NetServer.h"
 
-namespace covEngine
+namespace cov1013
 {
 	NetServer::NetServer()
 	{

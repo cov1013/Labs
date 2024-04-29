@@ -1,6 +1,6 @@
 #pragma once
-#pragma comment(lib, "DBConnector.lib")
-#pragma comment(lib, "ConaCore.lib")
+//#pragma comment(lib, "DBConnector.lib")
+#pragma comment(lib, "NetLib.lib")
 
 #include <vector>
 #include <time.h>

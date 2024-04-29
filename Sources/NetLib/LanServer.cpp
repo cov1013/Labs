@@ -1,6 +1,6 @@
 #include "LanServer.h"
 
-namespace covEngine
+namespace cov1013
 {
 	LanServer::LanServer()
 	{

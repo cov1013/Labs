@@ -2,7 +2,7 @@
 #include <direct.h>
 #include <strsafe.h>
 
-namespace covEngine
+namespace cov1013
 {
 	/*---------------------------------------------------------------------*/
 	// 출력 레벨

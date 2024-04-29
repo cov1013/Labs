@@ -1,6 +1,6 @@
 #include "MMOServer.h"
 
-namespace covEngine
+namespace cov1013
 {
 	///////////////////////////////////////////////////////////////////////////////////
 	// 생성자
@@ -32,12 +32,12 @@ namespace covEngine
 		//------------------------------------------------
 		// 시스템 로거 초기화
 		//------------------------------------------------
-		Logger::Logger(L"./Logs", eLOG_LEVEL_DEBUG);
+		Logger::Logger(L"./Logs/GameServer", eLOG_LEVEL_DEBUG);
 
 		//------------------------------------------------
 		// 프로파일러 초기화
 		//------------------------------------------------
-		InitializeProfiler(L"./Profiling", en_PROFILER_UNIT::eUNIT_MILLI);
+		InitializeProfiler(L"./Profiling/GameServer", en_PROFILER_UNIT::eUNIT_MILLI);
 
 		//------------------------------------------------
 		// WSA 초기화

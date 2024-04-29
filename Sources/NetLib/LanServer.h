@@ -24,7 +24,7 @@
 #include "RingBuffer.h"
 #include "PacketBuffer.h"
 
-namespace covEngine
+namespace cov1013
 {
 	class LanServer
 	{

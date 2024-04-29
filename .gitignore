@@ -398,5 +398,3 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Custom
-./tests/dummy/ChatDummy_*/_ChatDummyLog/*
-./src/ChatServer/Logs_*
