@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="cov1013::netlib">
+      <UniqueIdentifier>{23940fef-4b32-4de2-9725-728020c1da5b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\netlib\CCpuUsage.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCrashDump.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLanServer.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeQueue.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeStack.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLogger.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool_TLS.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Common.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPacket.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CParser.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPDH.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CQueue.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CRingBuffer.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLanClient.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CNetserver.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Profiler.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="Server.h" />
+    <ClInclude Include="..\..\netlib\CDBConnector.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CDBConnector_TLS.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CRedis_TLS.h">
+      <Filter>cov1013::netlib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\netlib\CCpuUsage.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CCrashDump.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLanServer.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLogger.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPacket.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPDH.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CRingBuffer.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLanClient.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CNetserver.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\Profiler.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp" />
+    <ClCompile Include="..\..\netlib\CDBConnector.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CDBConnector_TLS.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CRedis_TLS.cpp">
+      <Filter>cov1013::netlib</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

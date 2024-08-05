@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{1373afd1-c174-4016-a1aa-ce08b8d1862c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server\cov1013::netlib">
+      <UniqueIdentifier>{148875a9-75e7-420e-a760-65a8ea2f26f9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CEchoServer.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\..\netlib\CCpuUsage.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CCrashDump.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CDBConnector.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CDBConnector_TLS.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLanClient.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLanServer.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CLogger.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CMMOServer.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CMMOSession.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CNetserver.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CNetSession.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPacket.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CPDH.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CRedis_TLS.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\CRingBuffer.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\netlib\Profiler.cpp">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CEchoServer.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCpuUsage.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CCrashDump.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CDBConnector.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CDBConnector_TLS.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLanClient.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLanServer.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeQueue.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLockFreeStack.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CLogger.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMemoryPool_TLS.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMMOServer.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CMMOSession.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CNetserver.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CNetSession.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Common.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPacket.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CParser.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CPDH.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CQueue.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CRedis_TLS.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\CRingBuffer.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\MMO_Common.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\netlib\Profiler.h">
+      <Filter>Server\cov1013::netlib</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
