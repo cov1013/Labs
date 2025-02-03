@@ -33,7 +33,6 @@ namespace cov1013
 		int Read(BYTE* pDestination, const int inLength, bool bIsPeek = false);
 		int Peek(BYTE* pDestination, const int inLength);
 
-	private:
 		int MoveWritePos(const int inLength);
 		int MoveReadPos(const int inLength);
 

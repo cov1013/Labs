@@ -4,36 +4,28 @@
 
 namespace cov1013
 {
-	Logger* Logger::GetInstance()
-	{
-		if (m_pInstance == nullptr)
-		{
-			m_pInstance = new Logger();
-		}
+	//----------------------------------------------
+	// 기본 로그 레벨, 외부에서 설정할 수 있다.
+	//----------------------------------------------
+	en_LOG_LEVEL	Logger::sm_eLogLevel = eLOG_LEVEL_OFF;
 
-		return m_pInstance;
-	}
+	//----------------------------------------------
+	// 동기화를 위한 로그 카운트
+	//----------------------------------------------
+	DWORD			Logger::sm_dwLogCount = -1;
 
-	const bool Logger::Initialize(
-		const Logger::eLogLevel eLogLevel,
-		const std::wstring_view& directoryPath)
-	{
-		// 로그 레벨 세팅
-		if (eLogLevel < Logger::eLogLevel::None || eLogLevel >= Logger::eLogLevel::Max)
-		{
-			return false;
-		}
+	//----------------------------------------------
+	// 파일 핸들
+	//----------------------------------------------
+	FILE* Logger::sm_pFileStream = nullptr;
 
-		sm_eLogLevel = eLogLevel;
+	//----------------------------------------------
+	// 파일 핸들 획득을 위한 동기화 객체
+	//----------------------------------------------
+	SRWLOCK			Logger::sm_pFileStream_srw;
 
-		// 디렉토리 생성
-		if (!std::filesystem::exists(directoryPath) == false
-			|| !std::filesystem::is_directory(directoryPath) == false)
-		{
-			std::filesystem::create_directory(directoryPath);
-		}
-
-		InitializeSRWLock(&sm_pFileStream_srw);
-	}
-
+	//----------------------------------------------
+	// 디렉터리 이름을 담을 버퍼
+	//----------------------------------------------
+	wchar_t			Logger::sm_szDirectory[eDIRECTORY_MAX] = { 0 };
 }

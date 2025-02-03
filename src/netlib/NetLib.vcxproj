@@ -108,11 +108,12 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,12 +125,13 @@
       <WarningLevel>Level4</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <Optimization>Disabled</Optimization>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,12 +141,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MMOServer.cpp" />
     <ClCompile Include="MMOSession.cpp" />
     <ClCompile Include="CPUMeter.cpp" />
     <ClCompile Include="CrashDumper.cpp" />
     <ClCompile Include="LanClient.cpp" />
-    <ClCompile Include="SystemLogger.cpp" />
     <ClCompile Include="NetServer.cpp" />
     <ClCompile Include="PacketBuffer.cpp" />
     <ClCompile Include="PDH.cpp" />
@@ -153,6 +155,7 @@
     <ClCompile Include="Profiler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="MMOServer.h" />
     <ClInclude Include="MMOSession.h" />
     <ClInclude Include="CPUMeter.h" />
@@ -160,9 +163,9 @@
     <ClInclude Include="LanClient.h" />
     <ClInclude Include="ConcurrencyQueue.h" />
     <ClInclude Include="ConcurrencyStack.h" />
-    <ClInclude Include="SystemLogger.h" />
     <ClInclude Include="MemoryPool.h" />
     <ClInclude Include="MemoryPool_TLS.h" />
+    <ClInclude Include="MMO_Common.h" />
     <ClInclude Include="NetServer.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="PacketBuffer.h" />

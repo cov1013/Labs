@@ -95,7 +95,7 @@ namespace cov1013
 		st_OVERLAPPED					m_RecvOverlapped;
 		st_OVERLAPPED					m_SendOverlapped;
 
-		RingBuffer						m_RecvBuffer;
+		RingBuffer						m_RecvBuffer = { 1024 };
 		ConcurrencyQueue<PacketBuffer*>		m_SendBuffer;
 		PacketBuffer*						m_SendPacketArray[en_SEND_PACKET_MAX];
 		DWORD							m_SendPacketCount;

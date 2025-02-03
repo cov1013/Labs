@@ -7,15 +7,16 @@
 
 namespace cov1013
 {
+	constexpr static int CacheLineLength = 64;
+#ifdef __SAFE_MODE__
+	constexpr static int PaddingSize = CacheLineLength - sizeof(char*);
+#endif
+
 	template <class DATA>
 	class MemoryPool
 	{
 	private:
-		constexpr int CacheLineLength = 64;
-#ifdef __SAFE_MODE__
-		constexpr int PaddingSize = CacheLineLength - sizeof(char*);
-#endif
-		struct Node
+		struct st_BLOCK_NODE
 		{
 #ifdef __SAFE_MODE__
 			char*				FrontGuard = nullptr;
@@ -27,12 +28,12 @@ namespace cov1013
 			DATA				Data;
 			bool				bInitialize = false;
 #endif
-			Node*				pNextNode = nullptr;
+			st_BLOCK_NODE*		pNextNode = nullptr;
 		};
 
-		struct Head
+		struct st_TOP
 		{
-			Node*				pNode = nullptr;
+			st_BLOCK_NODE*		pNode = nullptr;
 			unsigned __int64	Key = 0;
 		};
 
@@ -102,12 +103,12 @@ namespace cov1013
 
 		void NewNode()
 		{
-			int nMemroySize = 0;
-			Node* pNewNode = nullptr;
+			int iSize = 0;
+			st_BLOCK_NODE* pNewNode = nullptr;
 
 #ifdef __SAFE_MODE__
-			nMemroySize = sizeof(char*) + PaddingSize + sizeof(DATA) + sizeof(bool) + sizeof(char*) + sizeof(Node*);
-			pNewNode = (Node*)_aligned_malloc(iSize, CacheLineLength);
+			iSize = sizeof(char*) + PaddingSize + sizeof(DATA) + sizeof(bool) + sizeof(char*) + sizeof(st_BLOCK_NODE*);
+			pNewNode = (st_BLOCK_NODE*)_aligned_malloc(iSize, CacheLineLength);
 			pNewNode->FrontGuard = m_Code;
 			pNewNode->RearGuard = m_Code;
 			pNewNode->bInitialize = false;
@@ -193,14 +194,14 @@ namespace cov1013
 		long GetUseCount() { return m_lUseCount; }
 
 	private:
-		alignas(en_CACHE_ALIGN)
+		alignas(CacheLineLength)
 		bool	m_bPlacementNew = false;
 		bool	m_bInitialize = false;
 #ifdef __SAFE_MODE__
 		char*	m_Code;
 #endif
-		alignas(en_CACHE_ALIGN) st_TOP m_Top;
-		alignas(en_CACHE_ALIGN) long m_lUseCount = 0;
-		alignas(en_CACHE_ALIGN) long m_lCapacity = 0;
+		alignas(CacheLineLength) st_TOP m_Top;
+		alignas(CacheLineLength) long m_lUseCount = 0;
+		alignas(CacheLineLength) long m_lCapacity = 0;
 	};
 }

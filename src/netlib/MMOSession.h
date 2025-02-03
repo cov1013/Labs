@@ -191,7 +191,7 @@ namespace cov1013
 		SESSION_INDEX m_SessionIndex;
 		st_OVERLAPPED m_RecvOverlapped;
 		st_OVERLAPPED m_SendOverlapped;
-		RingBuffer m_RecvBuffer;
+		RingBuffer m_RecvBuffer = { 1024 };
 		ConcurrencyQueue<PacketBuffer*> m_SendBuffer;
 		Queue<PacketBuffer*> m_CompleteRecvPacket;
 		PacketBuffer* m_SendPacketArray[en_SEND_PACKET_MAX];

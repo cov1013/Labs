@@ -347,13 +347,13 @@ namespace cov1013
         //--------------------------------------------------------
         // 1. 사용 가능 수신 버퍼 사이즈 얻기
         //--------------------------------------------------------
-        iLen1 = m_RecvBuffer.GetNonBrokenPutSize();
-        iLen2 = m_RecvBuffer.GetFreeSize();
+        iLen1 = m_RecvBuffer.GetSerialWritableLength();
+        iLen2 = m_RecvBuffer.GetWritableLength();
 
         //--------------------------------------------------------
         // 2. 기본 수신 버퍼 등록
         //--------------------------------------------------------
-        Buffers[0].buf = m_RecvBuffer.GetWritePos();
+        Buffers[0].buf = (CHAR*)m_RecvBuffer.GetWritePtr();
         Buffers[0].len = iLen1;
         iBufferCount = 1;
 
@@ -362,7 +362,7 @@ namespace cov1013
         //--------------------------------------------------------
         if (iLen2 > iLen1)
         {
-            Buffers[1].buf = m_RecvBuffer.GetBufferPtr();
+            Buffers[1].buf = (CHAR*)m_RecvBuffer.GetBufferPtr();
             Buffers[1].len = iLen2 - iLen1;
             iBufferCount = 2;
         }
@@ -480,7 +480,7 @@ namespace cov1013
             //--------------------------------------------------------
             // 1. 수신 버퍼에 헤더는 왔는가?
             //--------------------------------------------------------
-            int iUseSize = m_RecvBuffer.GetUseSize();
+            int iUseSize = m_RecvBuffer.GetReadableLength();
             if (iUseSize < sizeof(PacketBuffer::st_PACKET_LAN::Len))
             {
                 break;
@@ -489,7 +489,7 @@ namespace cov1013
             //--------------------------------------------------------
             // 2. 수신 버퍼에서 헤더 Peek
             //--------------------------------------------------------
-            m_RecvBuffer.Peek((char*)&Packet, sizeof(PacketBuffer::st_PACKET_LAN::Len));
+            m_RecvBuffer.Peek((BYTE*)&Packet, sizeof(PacketBuffer::st_PACKET_LAN::Len));
 
             //--------------------------------------------------------
             // 3. 수신 버퍼에 패킷이 완성됐는가?
@@ -509,7 +509,7 @@ namespace cov1013
             // 5. 페이로드를 수신 버퍼에서 직렬화 버퍼로 복사
             //--------------------------------------------------------
             PacketBuffer* pRecvPacket = PacketBuffer::Alloc();
-            iResult = m_RecvBuffer.Get(pRecvPacket->GetWritePos(), Packet.Len);
+            iResult = m_RecvBuffer.Read((BYTE*)pRecvPacket->GetWritePos(), Packet.Len);
             pRecvPacket->MoveWritePos(iResult);
 
             //--------------------------------------------------------

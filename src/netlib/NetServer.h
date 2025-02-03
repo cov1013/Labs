@@ -138,7 +138,7 @@ namespace cov1013
 			int								PacketCount;
 			PacketBuffer*					Packets[en_SEND_PACKET_MAX];
 			ConcurrencyQueue<PacketBuffer*>	SendQ;
-			RingBuffer						RecvQ;
+			RingBuffer						RecvQ = { 1024 };
 			bool							bSendFlag;
 			bool							bDisconnectFlag;
 			SOCKET							Socket;

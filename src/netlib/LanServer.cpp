@@ -178,7 +178,7 @@ namespace cov1013
 		//-----------------------------------------------------------------------
 		// 10. 인덱스 세팅
 		//-----------------------------------------------------------------------
-		for (int i = m_SessionMax; i > 0; i--)
+		for (short i = m_SessionMax; i > 0; i--)
 		{
 			m_Indexes.Push(i - 1);
 		}
@@ -722,13 +722,13 @@ namespace cov1013
 		//--------------------------------------------------------
 		// 1. 사용 가능 수신 버퍼 사이즈 얻기
 		//--------------------------------------------------------
-		iLen1 = pSession->RecvQ.GetNonBrokenPutSize();
-		iLen2 = pSession->RecvQ.GetFreeSize();
+		iLen1 = pSession->RecvQ.GetSerialWritableLength();
+		iLen2 = pSession->RecvQ.GetWritableLength();
 
 		//--------------------------------------------------------
 		// 2. 기본 수신 버퍼 등록
 		//--------------------------------------------------------
-		Buffers[0].buf = pSession->RecvQ.GetWritePos();
+		Buffers[0].buf = (CHAR*)pSession->RecvQ.GetWritePtr();
 		Buffers[0].len = iLen1;
 		iBufferCount = 1;
 
@@ -737,7 +737,7 @@ namespace cov1013
 		//--------------------------------------------------------
 		if (iLen2 > iLen1)
 		{
-			Buffers[1].buf = pSession->RecvQ.GetBufferPtr();
+			Buffers[1].buf = (CHAR*)pSession->RecvQ.GetBufferPtr();
 			Buffers[1].len = iLen2 - iLen1;
 			iBufferCount = 2;
 		}
@@ -863,7 +863,7 @@ namespace cov1013
 			//--------------------------------------------------------
 			// 1. 수신 버퍼에 헤더는 왔는가?
 			//--------------------------------------------------------
-			int iUseSize = pSession->RecvQ.GetUseSize();
+			int iUseSize = pSession->RecvQ.GetReadableLength();
 			if (iUseSize < sizeof(PacketBuffer::st_PACKET_LAN::Len))
 			{
 				break;
@@ -872,7 +872,7 @@ namespace cov1013
 			//--------------------------------------------------------
 			// 2. 수신 버퍼에서 헤더 Peek
 			//--------------------------------------------------------
-			pSession->RecvQ.Peek((char*)&Packet, sizeof(PacketBuffer::st_PACKET_LAN::Len));
+			pSession->RecvQ.Peek((BYTE*)&Packet, sizeof(PacketBuffer::st_PACKET_LAN::Len));
 
 			//--------------------------------------------------------
 			// 3. 수신 버퍼에 패킷이 완성됐는가?
@@ -892,7 +892,7 @@ namespace cov1013
 			// 5. 페이로드를 수신 버퍼에서 직렬화 버퍼로 복사
 			//--------------------------------------------------------
 			PacketBuffer* pRecvPacket = PacketBuffer::Alloc();
-			iResult = pSession->RecvQ.Get(pRecvPacket->GetWritePos(), Packet.Len);
+			iResult = pSession->RecvQ.Read((BYTE*)pRecvPacket->GetWritePos(), Packet.Len);
 			pRecvPacket->MoveWritePos(iResult);
 
 			//--------------------------------------------------------

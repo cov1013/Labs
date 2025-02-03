@@ -5,7 +5,6 @@
     <ClCompile Include="RingBuffer.cpp" />
     <ClCompile Include="CPUMeter.cpp" />
     <ClCompile Include="CrashDumper.cpp" />
-    <ClCompile Include="SystemLogger.cpp" />
     <ClCompile Include="PDH.cpp" />
     <ClCompile Include="Profiler.cpp" />
     <ClCompile Include="MMOSession.cpp">
@@ -23,6 +22,7 @@
     <ClCompile Include="LanClient.cpp">
       <Filter>Moulde</Filter>
     </ClCompile>
+    <ClCompile Include="Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
@@ -33,7 +33,6 @@
     <ClInclude Include="ConfigLoader.h" />
     <ClInclude Include="CPUMeter.h" />
     <ClInclude Include="CrashDumper.h" />
-    <ClInclude Include="SystemLogger.h" />
     <ClInclude Include="PDH.h" />
     <ClInclude Include="Profiler.h" />
     <ClInclude Include="ConcurrencyQueue.h" />
@@ -54,6 +53,8 @@
     <ClInclude Include="LanClient.h">
       <Filter>Moulde</Filter>
     </ClInclude>
+    <ClInclude Include="MMO_Common.h" />
+    <ClInclude Include="Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Moulde">

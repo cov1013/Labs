@@ -630,18 +630,18 @@ namespace cov1013
 		int		iLen2;
 
 		// 사용 가능 수신 버퍼 사이즈 얻기
-		iLen1 = pSession->RecvQ.GetNonBrokenPutSize();
-		iLen2 = pSession->RecvQ.GetFreeSize();
+		iLen1 = pSession->RecvQ.GetSerialWritableLength();
+		iLen2 = pSession->RecvQ.GetWritableLength();
 
 		// 기본 수신 버퍼 등록
-		Buffers[0].buf = pSession->RecvQ.GetWritePos();
+		Buffers[0].buf = (CHAR*)pSession->RecvQ.GetWritePtr();
 		Buffers[0].len = iLen1;
 		iBufferCount = 1;
 
 		// 수신 버퍼에 공간이 남아있다면 추가 등록
 		if (iLen2 > iLen1)
 		{
-			Buffers[1].buf = pSession->RecvQ.GetBufferPtr();
+			Buffers[1].buf = (CHAR*)pSession->RecvQ.GetBufferPtr();
 			Buffers[1].len = iLen2 - iLen1;
 			iBufferCount = 2;
 		}
@@ -756,7 +756,7 @@ namespace cov1013
 		while (true)
 		{
 			// 수신 버퍼에 헤더는 왔는가?
-			int iUseSize = pSession->RecvQ.GetUseSize();
+			int iUseSize = pSession->RecvQ.GetReadableLength();
 			if (iUseSize < PacketBuffer::eHEADER_LEN)
 			{
 				break;
@@ -764,7 +764,7 @@ namespace cov1013
 
 			// 수신 버퍼에서 헤더 Peek
 			PacketBuffer::st_PACKET_HEADER Header;
-			pSession->RecvQ.Peek((char*)&Header, PacketBuffer::eHEADER_LEN);
+			pSession->RecvQ.Peek((BYTE*)&Header, PacketBuffer::eHEADER_LEN);
 
 			// 패킷 Len 확인.
 			if (Header.Len > m_PacketSizeMax)
@@ -784,7 +784,7 @@ namespace cov1013
 			// 완성된 패킷이라면, 라이브러리 헤더를 삭제하고 직렬화 버퍼로 옮긴다.
 			PacketBuffer* pRecvPacket = PacketBuffer::Alloc();
 
-			iResult = pSession->RecvQ.Get(pRecvPacket->GetBufferPtr(), PacketBuffer::eHEADER_LEN + Header.Len);
+			iResult = pSession->RecvQ.Read((BYTE*)pRecvPacket->GetBufferPtr(), PacketBuffer::eHEADER_LEN + Header.Len);
 			pRecvPacket->MoveWritePos(iResult - PacketBuffer::eHEADER_LEN);	// 헤더 길이를 뺀 페이로드 사이즈 만큼 WritePos 이동
 
 			// 디코딩

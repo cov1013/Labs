@@ -4,35 +4,117 @@
 
 namespace cov1013
 {
+	/*---------------------------------------------------------------------*/
+	// 출력 레벨
+	/*---------------------------------------------------------------------*/
+	enum en_LOG_LEVEL
+	{
+		eLOG_LEVEL_OFF,
+		eLOG_LEVEL_DEBUG,
+		eLOG_LEVEL_ERROR,
+		eLOG_LEVEL_SYSTEM
+	};
+
+	/*---------------------------------------------------------------------*/
+	// 매크로
+	/*---------------------------------------------------------------------*/
+#define SYSLOG_LEVEL(Level)								Logger::SetLogLevel(Level)
+#define SYSLOG_DIRECTORY(szFolderName)					Logger::SetLogDirectory(szFolderName)
+#define LOG(Type, Level, Fmt, ...)						Logger::LogToFile(Type, Level, Fmt, ##__VA_ARGS__)
+#define CONSOLE(Level, Fmt, ...)						Logger::LogToConsole(Level, Fmt, ##__VA_ARGS__)
+#define LOG_HEX(Type, Level, Entry, Len, row, Fmt, ...) Logger::LogToFile_HEX(Type, Level, Entry, Len, row, Fmt, ##__VA_ARGS__)
+
 	class Logger
 	{
 	public:
-		enum class eLogLevel : UINT32
+		/*---------------------------------------------------------------------*/
+		// 클래스 기본 구성
+		//
+		// eSTRING_MAX    : 스트링 최대 길이
+		// eDIRECTORY_MAX : 디렉터리 최대 길이
+		/*---------------------------------------------------------------------*/
+		enum en_CONFIG
 		{
-			None = 0,
-			Degun = 1,
-			Error = 2,
-			Warning = 3,
-			System = 4,
-			Max, // Not Uesd
+			eSTRING_MAX = 256,
+			eDIRECTORY_MAX = 256,
 		};
 
 	public:
-		static Logger* GetInstance();
+		//////////////////////////////////////////////////////////////////////////
+		// 생성자
+		//////////////////////////////////////////////////////////////////////////
+		Logger(const wchar_t* szDirectory, int eLogLevel = eLOG_LEVEL_OFF)
+		{
+			//--------------------------------------------------------
+			// 출력 디렉토리 설정
+			//--------------------------------------------------------
+			SetLogDirectory(szDirectory);
 
-	private:
-		static Logger* m_pInstance;
+			//--------------------------------------------------------
+			// 로그 레벨 설정
+			//--------------------------------------------------------
+			SetLogLevel(eLogLevel);
 
-	public:
-		const bool Initialize(const eLogLevel eLogLevel, const std::wstring_view& directoryPath);
-		void LogToFile(const std::string_view* logType, const Logger::eLogLevel eLogLevel, const WCHAR* szStringFormat, ...);
+			//--------------------------------------------------------
+			// 동기화 객체 초기화
+			//--------------------------------------------------------
+			InitializeSRWLock(&sm_pFileStream_srw);
+		};
 
-	private:
-		Logger() = default;
-		Logger(const Logger& other) = delete;
-		virtual ~Logger() = default;
-		
-		static void LogToFile(const std::st* szType, eLevel eLogLevel, const WCHAR* szStringFormat, ...)
+		//////////////////////////////////////////////////////////////////////////
+		// 소멸자
+		//////////////////////////////////////////////////////////////////////////
+		virtual ~Logger() {};
+
+		//////////////////////////////////////////////////////////////////////////
+		// 로그 레벨 설정
+		//////////////////////////////////////////////////////////////////////////
+		static bool SetLogLevel(int eLogLevel)
+		{
+			if (eLogLevel < eLOG_LEVEL_OFF || eLogLevel > eLOG_LEVEL_SYSTEM)
+			{
+				return false;
+			}
+
+			sm_eLogLevel = (en_LOG_LEVEL)eLogLevel;
+
+			return true;
+		};
+
+		//////////////////////////////////////////////////////////////////////////
+		// 로그 레벨 출력
+		//////////////////////////////////////////////////////////////////////////
+		static en_LOG_LEVEL GetLogLevel(void)
+		{
+			return sm_eLogLevel;
+		}
+
+		//////////////////////////////////////////////////////////////////////////
+		// 출력 디렉토리 설정
+		//////////////////////////////////////////////////////////////////////////
+		static bool SetLogDirectory(const wchar_t* szDirectory)
+		{
+			//----------------------------------------------
+			// 폴더 생성
+			//----------------------------------------------
+			int iResult = _wmkdir(szDirectory);
+			if (iResult == ENOENT)
+			{
+				return false;
+			}
+
+			//----------------------------------------------
+			// 폴더 경로 세팅
+			//----------------------------------------------		
+			StringCchPrintf(sm_szDirectory, eDIRECTORY_MAX, szDirectory);
+
+			return true;
+		};
+
+		//////////////////////////////////////////////////////////////////////////
+		// 파일에 로그 출력
+		//////////////////////////////////////////////////////////////////////////
+		static void LogToFile(const WCHAR* szType, en_LOG_LEVEL eLogLevel, const WCHAR* szStringFormat, ...)
 		{
 			//----------------------------------------------
 			// 로그 카운터 갱신
@@ -98,6 +180,10 @@ namespace cov1013
 			fclose(sm_pFileStream);
 			ReleaseSRWLockExclusive(&sm_pFileStream_srw);
 		};
+
+		//////////////////////////////////////////////////////////////////////////
+		// 파일에 Hex 메모리 로그 출력
+		//////////////////////////////////////////////////////////////////////////
 		static void LogToFile_HEX(const WCHAR* szType, en_LOG_LEVEL eLogLevel, char* pByte, int iByteLen, int iRow, const WCHAR* szStringFormat, ...)
 		{
 			//----------------------------------------------
@@ -172,6 +258,10 @@ namespace cov1013
 			fclose(sm_pFileStream);
 			ReleaseSRWLockExclusive(&sm_pFileStream_srw);
 		};
+
+		//////////////////////////////////////////////////////////////////////////
+		// 콘솔에 로그 출력
+		//////////////////////////////////////////////////////////////////////////
 		static void LogToConsole(en_LOG_LEVEL eLogLevel, const WCHAR* szStringFormat, ...)
 		{
 			//----------------------------------------------
@@ -198,12 +288,11 @@ namespace cov1013
 		};
 
 	private:
-		SRWLOCK	m_srw = {};
-		int32_t	m_Index = -1;
-		eLogLevel m_eLevel = eLogLevel::None;
+		static en_LOG_LEVEL sm_eLogLevel;
+		static DWORD		sm_dwLogCount;
+		static FILE* sm_pFileStream;
+		static SRWLOCK		sm_pFileStream_srw;
+		static wchar_t		sm_szDirectory[eDIRECTORY_MAX];
 	};
-
-	#define LOG(Type, Level, Format, ...) Logger::LogToFile(Type, Level, Fmt, ##__VA_ARGS__)
-	#define LOG_CONSOLE(Level, Format, ...)	Logger::LogToConsole(Level, Fmt, ##__VA_ARGS__)
-	#define LOG_HEX(Type, Level, Entry, Length, Row, Format, ...) Logger::LogToFile_HEX(Type, Level, Entry, Len, row, Fmt, ##__VA_ARGS__)
 }
+
