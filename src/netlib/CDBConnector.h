@@ -1,8 +1,9 @@
 #pragma once
-#include <winsock2.h>
 #include "Common.h"
-#include "libmysql/include/mysql.h"
-#include "libmysql/include/errmsg.h"
+#include "libmysql/includes/mysql.h"
+#include "libmysql/includes/errmsg.h"
+//#include "_lib/mysql/include/mysql.h"
+//#include "_lib/mysql/include/errmsg.h"
 
 namespace cov1013
 {

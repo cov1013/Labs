@@ -1,4 +1,5 @@
 #pragma comment(lib, "Winmm")
+#pragma comment(lib, "libmysql/libmysql.lib")
 #include <windows.h>
 #include <strsafe.h>
 #include <stdlib.h>

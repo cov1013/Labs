@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="PacketBuffer.cpp" />
+    <ClCompile Include="RingBuffer.cpp" />
+    <ClCompile Include="CPUMeter.cpp" />
+    <ClCompile Include="CrashDumper.cpp" />
+    <ClCompile Include="SystemLogger.cpp" />
+    <ClCompile Include="PDH.cpp" />
+    <ClCompile Include="Profiler.cpp" />
+    <ClCompile Include="MMOSession.cpp">
+      <Filter>Moulde</Filter>
+    </ClCompile>
+    <ClCompile Include="MMOServer.cpp">
+      <Filter>Moulde</Filter>
+    </ClCompile>
+    <ClCompile Include="NetServer.cpp">
+      <Filter>Moulde</Filter>
+    </ClCompile>
+    <ClCompile Include="LanServer.cpp">
+      <Filter>Moulde</Filter>
+    </ClCompile>
+    <ClCompile Include="LanClient.cpp">
+      <Filter>Moulde</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="MemoryPool_TLS.h" />
+    <ClInclude Include="MemoryPool.h" />
+    <ClInclude Include="RingBuffer.h" />
+    <ClInclude Include="PacketBuffer.h" />
+    <ClInclude Include="ConfigLoader.h" />
+    <ClInclude Include="CPUMeter.h" />
+    <ClInclude Include="CrashDumper.h" />
+    <ClInclude Include="SystemLogger.h" />
+    <ClInclude Include="PDH.h" />
+    <ClInclude Include="Profiler.h" />
+    <ClInclude Include="ConcurrencyQueue.h" />
+    <ClInclude Include="ConcurrencyStack.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="MMOServer.h">
+      <Filter>Moulde</Filter>
+    </ClInclude>
+    <ClInclude Include="MMOSession.h">
+      <Filter>Moulde</Filter>
+    </ClInclude>
+    <ClInclude Include="NetServer.h">
+      <Filter>Moulde</Filter>
+    </ClInclude>
+    <ClInclude Include="LanServer.h">
+      <Filter>Moulde</Filter>
+    </ClInclude>
+    <ClInclude Include="LanClient.h">
+      <Filter>Moulde</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Moulde">
+      <UniqueIdentifier>{306743ee-8448-4da1-b786-ac1e998b14db}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

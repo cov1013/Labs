@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GameServer.cpp" />
+    <ClCompile Include="GamePlayer.cpp" />
+    <ClCompile Include="PacketDispatcher.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameServer.h" />
+    <ClInclude Include="GamePlayer.h" />
+    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="PacketDispatcher.h" />
+  </ItemGroup>
+</Project>

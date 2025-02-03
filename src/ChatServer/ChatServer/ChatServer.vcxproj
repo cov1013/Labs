@@ -81,10 +81,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);</IncludePath>
+    <OutDir>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);</IncludePath>
+    <OutDir>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,15 +127,17 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_WINSOCKAPI_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\netlib;$(ProjectDir)..\..\netlib\thirdparty</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\NetLib;D:\OneDrive - 한국방송통신대학교\Jinwon\Procademy\Sources\netlib</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\netlib\thirdparty;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NetLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,72 +146,33 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_WINSOCKAPI_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\netlib;$(ProjectDir)..\..\netlib\thirdparty</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\NetLib;$(SolutionDir)..\netlib</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\..\netlib\thirdparty;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>NetLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\netlib\CCpuUsage.h" />
-    <ClInclude Include="..\..\netlib\CCrashDump.h" />
-    <ClInclude Include="..\..\netlib\CDBConnector.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\netlib\CDBConnector_TLS.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="..\..\netlib\CLanServer.h" />
-    <ClInclude Include="..\..\netlib\CLockFreeQueue.h" />
-    <ClInclude Include="..\..\netlib\CLockFreeStack.h" />
-    <ClInclude Include="..\..\netlib\CLogger.h" />
-    <ClInclude Include="..\..\netlib\CMemoryPool.h" />
-    <ClInclude Include="..\..\netlib\CMemoryPool_TLS.h" />
-    <ClInclude Include="..\..\netlib\Common.h" />
-    <ClInclude Include="..\..\netlib\CPacket.h" />
-    <ClInclude Include="..\..\netlib\CParser.h" />
-    <ClInclude Include="..\..\netlib\CPDH.h" />
-    <ClInclude Include="..\..\netlib\CQueue.h" />
-    <ClInclude Include="..\..\netlib\CRedis_TLS.h" />
-    <ClInclude Include="..\..\netlib\CRingBuffer.h" />
-    <ClInclude Include="..\..\netlib\CLanClient.h" />
-    <ClInclude Include="..\..\netlib\CNetserver.h" />
-    <ClInclude Include="..\..\netlib\Profiler.h" />
-    <ClInclude Include="Server.h" />
+    <ClInclude Include="ChatServer.h" />
+    <ClInclude Include="ClientManager.h" />
+    <ClInclude Include="CommonDefine.h" />
+    <ClInclude Include="ErrorCode.h" />
     <ClInclude Include="Protocol.h" />
+    <ClInclude Include="ServerConfig.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\netlib\CCpuUsage.cpp" />
-    <ClCompile Include="..\..\netlib\CCrashDump.cpp" />
-    <ClCompile Include="..\..\netlib\CDBConnector.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\netlib\CDBConnector_TLS.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\netlib\CLanServer.cpp" />
-    <ClCompile Include="..\..\netlib\CLogger.cpp" />
-    <ClCompile Include="..\..\netlib\CPacket.cpp" />
-    <ClCompile Include="..\..\netlib\CPDH.cpp" />
-    <ClCompile Include="..\..\netlib\CRedis_TLS.cpp" />
-    <ClCompile Include="..\..\netlib\CRingBuffer.cpp" />
-    <ClCompile Include="..\..\netlib\CLanClient.cpp" />
-    <ClCompile Include="..\..\netlib\CNetserver.cpp" />
-    <ClCompile Include="..\..\netlib\Profiler.cpp" />
-    <ClCompile Include="Server.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ChatServer.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

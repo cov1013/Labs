@@ -13,8 +13,8 @@ namespace cov1013
 
 	CRedis_TLS::~CRedis_TLS()
 	{
-		list<cpp_redis::client*>::iterator ClientIter = m_Clients.begin();
-		list<cpp_redis::client*>::iterator ClientEnd  = m_Clients.end();
+		list<client*>::iterator ClientIter = m_Clients.begin();
+		list<client*>::iterator ClientEnd  = m_Clients.end();
 		for (ClientIter; ClientIter != ClientEnd;)
 		{
 			delete (*ClientIter);
@@ -26,7 +26,7 @@ namespace cov1013
 
 	void CRedis_TLS::Set(const char* Key, char* Value)
 	{
-		cpp_redis::client* pClient = (cpp_redis::client*)TlsGetValue(m_dwTlsIndex);
+		client* pClient = (client*)TlsGetValue(m_dwTlsIndex);
 
 		//----------------------------------------------------------------
 		// 데이터를 저장할 공간이 할당된 적이 있는지 확인한다.
@@ -37,7 +37,7 @@ namespace cov1013
 			// 공간이 할당되어 있지 않다면, 이 함수는
 			// 해당 스레드에 의해 최초로 호출된 경우이다.
 			//----------------------------------------------------------------
-			pClient = new cpp_redis::client;
+			pClient = new client;
 			pClient->connect();
 
 			//----------------------------------------------------------------
@@ -57,9 +57,9 @@ namespace cov1013
 		pClient->sync_commit();
 	}
 
-	void CRedis_TLS::Get(const char* Key, future<cpp_redis::reply>* pReply)
+	void CRedis_TLS::Get(const char* Key, future<reply>* pReply)
 	{
-		cpp_redis::client* pClient = (cpp_redis::client*)TlsGetValue(m_dwTlsIndex);
+		client* pClient = (client*)TlsGetValue(m_dwTlsIndex);
 
 		//----------------------------------------------------------------
 		// 데이터를 저장할 공간이 할당된 적이 있는지 확인한다.
@@ -70,7 +70,7 @@ namespace cov1013
 			// 공간이 할당되어 있지 않다면, 이 함수는
 			// 해당 스레드에 의해 최초로 호출된 경우이다.
 			//----------------------------------------------------------------
-			pClient = new cpp_redis::client;
+			pClient = new client;
 			pClient->connect();
 
 			//----------------------------------------------------------------
@@ -92,7 +92,7 @@ namespace cov1013
 
 	bool CRedis_TLS::Disconnect(void)
 	{
-		cpp_redis::client* pClient = (cpp_redis::client*)TlsGetValue(m_dwTlsIndex);
+		client* pClient = (client*)TlsGetValue(m_dwTlsIndex);
 
 		//----------------------------------------------------------------
 		// 데이터를 저장할 공간이 할당된 적이 있는지 확인한다.
@@ -108,8 +108,8 @@ namespace cov1013
 		// 관리 컨테이너에서 삭제
 		//----------------------------------------------------------------
 		LockClients();
-		list<cpp_redis::client*>::iterator ClientIter = m_Clients.begin();
-		list<cpp_redis::client*>::iterator ClientEnd = m_Clients.end();
+		list<client*>::iterator ClientIter = m_Clients.begin();
+		list<client*>::iterator ClientEnd = m_Clients.end();
 		for (ClientIter; ClientIter != ClientEnd; ++ClientIter)
 		{
 			if (*ClientIter == pClient)

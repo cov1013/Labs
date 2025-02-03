@@ -6,11 +6,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "CLoginServer.h"
+#include "LoginServer.h"
 
 using namespace cov1013;
 
-CLoginServer Server;
+LoginServer Server;
 
 int main(void)
 {

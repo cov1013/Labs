@@ -1,10 +1,11 @@
 #pragma once
 
 #include <list>
-
 #include "cpp_redis/cpp_redis"
+#include "CRedis_TLS.h"
 
 using namespace std;
+using namespace cpp_redis;
 
 namespace cov1013
 {
@@ -14,7 +15,7 @@ namespace cov1013
 		CRedis_TLS();
 		~CRedis_TLS();
 		void Set(const char* Key, char* Value);
-		void Get(const char* Key, future<cpp_redis::reply>* pReply);
+		void Get(const char* Key, future<reply>* pReply);
 		bool Disconnect(void);
 
 	private:
@@ -22,8 +23,8 @@ namespace cov1013
 		void UnlockClients(void);
 
 	private:
-		DWORD						m_dwTlsIndex;
-		list<cpp_redis::client*>	m_Clients;
-		SRWLOCK						m_Clients_srw;
+		DWORD			m_dwTlsIndex;
+		list<client*>	m_Clients;
+		SRWLOCK			m_Clients_srw;
 	};
 }
